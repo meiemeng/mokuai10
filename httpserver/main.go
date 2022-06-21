@@ -7,6 +7,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"httpserver/metrics"
 	"os"
 
 	"github.com/golang/glog"
@@ -19,6 +20,7 @@ func main() {
 	c, python, java := true, false, "no!"
 	//定义healthz用于返回200
 	http.HandleFunc("/healthz", healthz)
+	metrics.Register()
 	//定义延迟操作 并定义promethes监控方式
 	controller.RegisterRoutes()
 	fmt.Println(c, python, java)
